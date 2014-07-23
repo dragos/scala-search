@@ -54,8 +54,11 @@ class IndexJobManager(indexer: SourceIndexer) extends Lifecycle with HasLogger {
       onClose = stopIndexing(_),
       onDelete = project => {
         stopIndexing(project)
-        if(indexer.index.indexExists(project))
+        logger.info(s"Stopped indexing for ${project.getName}")
+        if(indexer.index.indexExists(project)) {
+          logger.info(s"Deleting index for ${project.getName}")
           indexer.index.deleteIndex(project)
+        }
       })
   }
 
