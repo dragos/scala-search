@@ -89,6 +89,7 @@ trait Index extends HasLogger {
       f.delete
     }
 
+    logger.debug(s"Deleting index for project ${project.getName}")
     Try(deleteRec(location(project).toFile)).recover {
       case t: Throwable =>
         logger.debug(s"Exception while deleting index for project `${project.getName}`", t)

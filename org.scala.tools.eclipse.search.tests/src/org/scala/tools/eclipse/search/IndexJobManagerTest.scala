@@ -220,7 +220,7 @@ class IndexJobManagerTest {
     // than 10 seconds.
     SDTTestUtils.waitUntil(10000)(indexer.index.location(p.underlying).toFile.exists)
 
-    assertTrue(indexer.index.location(p.underlying).toFile.exists)
+    assertTrue("Index file created", indexer.index.location(p.underlying).toFile.exists)
 
     // event
     p.underlying.delete(true, monitor)
@@ -230,7 +230,7 @@ class IndexJobManagerTest {
     SDTTestUtils.waitUntil(10000)(!indexer.index.location(p.underlying).toFile.exists)
 
     // expected
-    assertFalse(indexer.index.location(p.underlying).toFile.exists)
+    assertFalse("Index file deleted", indexer.index.location(p.underlying).toFile.exists)
     observer.stop
   }
 }
